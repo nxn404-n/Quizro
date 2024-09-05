@@ -5,7 +5,16 @@ import { useSelector } from "react-redux";
 
 const Quiz = (props) => {
   const filteredQuizData = props.data.filter(quiz => quiz.correct_answer !== null);
+  
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  //Counter for checking how many correct answer were selected
+  const [correctAnsCount, setCorrectAnsCount] = useState(0);
+
+  function increaseCorrectAnsCount() {
+    setCorrectAnsCount(prevCount => prevCount + 1);
+  }
+
   const { status } = useSelector((state) => state.quiz);
 
   const handleNext = () => {
@@ -34,6 +43,7 @@ const Quiz = (props) => {
             <QuizAnswers
               answers={quiz.answers}
               correctAns={quiz.correct_answer}
+              increaseCorrectAnsCount={increaseCorrectAnsCount}
             />
             <div>
               <button onClick={handlePrevious} disabled={currentIndex === 0}>

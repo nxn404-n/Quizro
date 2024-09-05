@@ -11,6 +11,7 @@ const QuizAnswers = (props) => {
 
     if (key === props.correctAns) {
       setMessage("You're Correct, The answer is: ");
+      props.increaseCorrectAnsCount()
     } else {
       setMessage("You're Wrong, The Correct Answer Is: ");
     }
@@ -42,9 +43,10 @@ const QuizAnswers = (props) => {
 };
 
 QuizAnswers.propTypes = {
-  answer: PropTypes.object.isRequired,
+  answer: PropTypes.object,
   correctAns: PropTypes.string.isRequired,
   answers: PropTypes.object.isRequired,
+  increaseCorrectAnsCount: PropTypes.func.isRequired,
 };
 
 export default QuizAnswers;
