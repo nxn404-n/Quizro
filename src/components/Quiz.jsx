@@ -40,6 +40,15 @@ const Quiz = (props) => {
     return <p>Loading...</p>;
   }
 
+  if (status === "failed") {
+    return (
+      <div>
+        <p>Sorry no quiz available for now!</p>
+        <button onClick={props.onClose}>Go back to Homepage</button>
+      </div>
+    );
+  }
+
   if (quizCompleted) {
     return (
       <div>
@@ -68,11 +77,7 @@ const Quiz = (props) => {
               <button onClick={handlePrevious} disabled={currentIndex === 0}>
                 Previous
               </button>
-              <button
-                onClick={handleNext}
-              >
-                Next
-              </button>
+              <button onClick={handleNext}>Next</button>
             </div>
           </div>
         ) : null
