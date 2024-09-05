@@ -1,23 +1,54 @@
 import PropTypes from "prop-types";
-
-import "./Quiz.css";
+import { useState } from "react";
 import QuizAnswers from "./QuizAnswers";
+import { useSelector } from "react-redux";
 
 const Quiz = (props) => {
+  const filteredQuizData = props.data.filter(quiz => quiz.correct_answer !== null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const { status } = useSelector((state) => state.quiz);
+
+  const handleNext = () => {
+    if (currentIndex < filteredQuizData.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
+
+  if (status === 'loading') {
+    return <p>Loading...</p>
+  }
+
   return (
     <div>
       <button onClick={props.onClose}>Close Quiz</button>
-      {props.data
-        .filter((item) => item.correct_answer !== null)
-        .map((data, id) => (
-          <div key={id} className='quizes'>
-            <p>{data.question}</p>
+      {filteredQuizData.map((quiz, index) =>
+        index === currentIndex ? (
+          <div key={index} className="quizes">
+            <p>{quiz.question}</p>
             <QuizAnswers
-              answers={data.answers}
-              correctAns={data.correct_answer}
+              answers={quiz.answers}
+              correctAns={quiz.correct_answer}
             />
+            <div>
+              <button onClick={handlePrevious} disabled={currentIndex === 0}>
+                Previous
+              </button>
+              <button
+                onClick={handleNext}
+                disabled={currentIndex === filteredQuizData.length - 1}
+              >
+                Next
+              </button>
+            </div>
           </div>
-        ))}
+        ) : null
+      )}
     </div>
   );
 };
