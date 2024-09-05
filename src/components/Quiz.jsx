@@ -2,17 +2,22 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import QuizAnswers from "./QuizAnswers";
 import { useSelector } from "react-redux";
+import ResultPage from "./ResultPage";
 
 const Quiz = (props) => {
-  const filteredQuizData = props.data.filter(quiz => quiz.correct_answer !== null);
-  
+  const filteredQuizData = props.data.filter(
+    (quiz) => quiz.correct_answer !== null
+  );
+
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const [quizCompleted, setQuizCompleted] = useState(false);
 
   //Counter for checking how many correct answer were selected
   const [correctAnsCount, setCorrectAnsCount] = useState(0);
 
   function increaseCorrectAnsCount() {
-    setCorrectAnsCount(prevCount => prevCount + 1);
+    setCorrectAnsCount((prevCount) => prevCount + 1);
   }
 
   const { status } = useSelector((state) => state.quiz);
@@ -20,6 +25,8 @@ const Quiz = (props) => {
   const handleNext = () => {
     if (currentIndex < filteredQuizData.length - 1) {
       setCurrentIndex(currentIndex + 1);
+    } else {
+      setQuizCompleted(true);
     }
   };
 
@@ -29,8 +36,20 @@ const Quiz = (props) => {
     }
   };
 
-  if (status === 'loading') {
-    return <p>Loading...</p>
+  if (status === "loading") {
+    return <p>Loading...</p>;
+  }
+
+  if (quizCompleted) {
+    return (
+      <div>
+        <ResultPage
+          correctAnsCount={correctAnsCount}
+          totalQuizCount={filteredQuizData.length}
+          onClose={props.onClose}
+        />
+      </div>
+    );
   }
 
   return (
@@ -38,7 +57,7 @@ const Quiz = (props) => {
       <button onClick={props.onClose}>Close Quiz</button>
       {filteredQuizData.map((quiz, index) =>
         index === currentIndex ? (
-          <div key={index} className="quizes">
+          <div key={index} className='quizes'>
             <p>{quiz.question}</p>
             <QuizAnswers
               answers={quiz.answers}
@@ -51,7 +70,6 @@ const Quiz = (props) => {
               </button>
               <button
                 onClick={handleNext}
-                disabled={currentIndex === filteredQuizData.length - 1}
               >
                 Next
               </button>
