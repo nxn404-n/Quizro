@@ -30,12 +30,6 @@ const Quiz = (props) => {
     }
   };
 
-  const handlePrevious = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
-  };
-
   if (status === "loading") {
     return <p>Loading...</p>;
   }
@@ -74,9 +68,6 @@ const Quiz = (props) => {
               increaseCorrectAnsCount={increaseCorrectAnsCount}
             />
             <div>
-              <button onClick={handlePrevious} disabled={currentIndex === 0}>
-                Previous
-              </button>
               <button onClick={handleNext}>Next</button>
             </div>
           </div>
