@@ -13,20 +13,21 @@
   transform-origin: top;
 }
 
-.transition-border-radius {
-  transition: border-radius 500ms ease;
-}
-
 .custom-underline:hover {
   text-decoration: underline;
   text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
+  text-underline-offset: 5px;
   transition: text-decoration ease-in-out 1s;
 }
 
 .custom-btn {
-  @apply bg-[#E7E7E7] text-[#FF6340] px-3 py-1 text-lg font-medium font-Lato
+  @apply bg-[#E7E7E7] text-[#000000] px-3 py-1 text-lg font-medium font-Lato transition-colors duration-500 ease-in-out
 }
+
+.custom-btn:hover {
+  @apply hover:bg-[#FF6340] hover:text-[#E7E7E7]
+}
+
 
 @keyframes slideDown {
   0% {

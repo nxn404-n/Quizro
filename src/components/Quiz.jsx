@@ -6,7 +6,7 @@ import ResultPage from "./ResultPage";
 
 const Quiz = (props) => {
   const filteredQuizData = props.data.filter(
-    (quiz) => quiz.correct_answer !== null
+    (quiz) => quiz.correct_answer !== null,
   );
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,6 +14,12 @@ const Quiz = (props) => {
   const [quizCompleted, setQuizCompleted] = useState(false);
 
   const [qusCounter, setQusCounter] = useState(1);
+
+  const [skipOrNext, setSkipOrNext] = useState(true);
+
+  function handleSkipOrNext() {
+    setSkipOrNext(!skipOrNext);
+  }
 
   //Counter for checking how many correct answer were selected
   const [correctAnsCount, setCorrectAnsCount] = useState(0);
@@ -24,7 +30,7 @@ const Quiz = (props) => {
 
   const { status } = useSelector((state) => state.quiz);
 
-  const handleNext = () => {
+  const handleSkip = () => {
     if (currentIndex < filteredQuizData.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
@@ -48,7 +54,7 @@ const Quiz = (props) => {
 
   if (quizCompleted) {
     return (
-      <div>
+      <div className="text-[#E7E7E7]">
         <ResultPage
           correctAnsCount={correctAnsCount}
           totalQuizCount={filteredQuizData.length}
@@ -59,23 +65,33 @@ const Quiz = (props) => {
   }
 
   return (
-    <div className="text-[#E7E7E7] ml-6 mr-6 flex flex-col justify-center items-start gap-8 mt-9">
-      <button onClick={props.onClose} className="custom-btn">Close Quiz</button>
-      <div>Question: { qusCounter }</div>
+    <div className="ml-6 mr-6 mt-9 flex flex-col items-start justify-center gap-8 text-[#E7E7E7]">
+      <button onClick={props.onClose} className="custom-btn ease-in-out hover:rounded-md">
+        Close Quiz
+      </button>
+      {status === "succeeded" && (
+        <div className="self-center">Question: {qusCounter}</div>
+      )}
       {filteredQuizData.map((quiz, index) =>
         index === currentIndex ? (
-          <div key={index} className="font-Barlow text-lg font-semibold flex flex-col gap-5">
-            <p className="border-2">{quiz.question}</p>
+          <div
+            key={index}
+            className="flex flex-col gap-5 font-Barlow text-lg font-semibold"
+          >
+            <p>{quiz.question}</p>
             <QuizAnswers
               answers={quiz.answers}
               correctAns={quiz.correct_answer}
               increaseCorrectAnsCount={increaseCorrectAnsCount}
+              handleSkipOrNext={handleSkipOrNext}
             />
             <div>
-              <button onClick={handleNext} className="custom-btn">Next</button>
+              <button onClick={handleSkip} className="custom-btn hover:rounded-md">
+                {skipOrNext ? "skip" : "next"}
+              </button>
             </div>
           </div>
-        ) : null
+        ) : null,
       )}
     </div>
   );
@@ -87,7 +103,7 @@ Quiz.propTypes = {
       question: PropTypes.string.isRequired,
       answers: PropTypes.object.isRequired,
       correct_answer: PropTypes.string,
-    })
+    }),
   ).isRequired,
   onClose: PropTypes.func.isRequired,
 };
