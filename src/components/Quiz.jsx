@@ -56,11 +56,11 @@ const Quiz = (props) => {
   }
 
   return (
-    <div>
+    <div className="text-[#E7E7E7] pl-6">
       <button onClick={props.onClose}>Close Quiz</button>
       {filteredQuizData.map((quiz, index) =>
         index === currentIndex ? (
-          <div key={index} className='quizes'>
+          <div key={index}>
             <p>{quiz.question}</p>
             <QuizAnswers
               answers={quiz.answers}

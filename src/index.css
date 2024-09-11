@@ -1,3 +1,60 @@
+/* Tailwind directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dropdown.open {
+  animation: slideDown 500ms ease-in-out forwards;
+  transform-origin: top;
+}
+
+.dropdown.close {
+  animation: slideUp 500ms ease-out forwards;
+  transform-origin: top;
+}
+
+.transition-border-radius {
+  transition: border-radius 500ms ease;
+}
+
+.custom-underline:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: text-decoration ease-in-out 1s;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+    border-radius: 0 0 6px 6px;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: scaleY(1);
+    opacity: 1;
+    border-radius: 0 0 1px 1px;
+  }
+
+  33% {
+    border-radius: 0 0 2px 2px;
+  }
+
+  66% {
+    border-radius: 0 0 4px 4px;
+  }
+
+  100% {
+    transform: scaleY(0);
+    opacity: 1;
+    border-radius: 0 0 6px 6px;
+  }
+}
+

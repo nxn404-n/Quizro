@@ -7,8 +7,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        custom: ['Kanit', 'sans'],
-      }
+        Kanit: ['Kanit', 'sans'],
+        Lato: ['Lato', 'sans'],
+        Barlow: ['Barlow', 'sans'],
+      },
     },
   },
   plugins: [],
