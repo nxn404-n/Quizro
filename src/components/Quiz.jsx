@@ -13,6 +13,8 @@ const Quiz = (props) => {
 
   const [quizCompleted, setQuizCompleted] = useState(false);
 
+  const [qusCounter, setQusCounter] = useState(1);
+
   //Counter for checking how many correct answer were selected
   const [correctAnsCount, setCorrectAnsCount] = useState(0);
 
@@ -28,6 +30,7 @@ const Quiz = (props) => {
     } else {
       setQuizCompleted(true);
     }
+    setQusCounter((prevCount) => prevCount + 1);
   };
 
   if (status === "loading") {
@@ -56,19 +59,20 @@ const Quiz = (props) => {
   }
 
   return (
-    <div className="text-[#E7E7E7] pl-6">
-      <button onClick={props.onClose}>Close Quiz</button>
+    <div className="text-[#E7E7E7] ml-6 mr-6 flex flex-col justify-center items-start gap-8 mt-9">
+      <button onClick={props.onClose} className="custom-btn">Close Quiz</button>
+      <div>Question: { qusCounter }</div>
       {filteredQuizData.map((quiz, index) =>
         index === currentIndex ? (
-          <div key={index}>
-            <p>{quiz.question}</p>
+          <div key={index} className="font-Barlow text-lg font-semibold flex flex-col gap-5">
+            <p className="border-2">{quiz.question}</p>
             <QuizAnswers
               answers={quiz.answers}
               correctAns={quiz.correct_answer}
               increaseCorrectAnsCount={increaseCorrectAnsCount}
             />
             <div>
-              <button onClick={handleNext}>Next</button>
+              <button onClick={handleNext} className="custom-btn">Next</button>
             </div>
           </div>
         ) : null

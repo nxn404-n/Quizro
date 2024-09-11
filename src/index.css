@@ -24,6 +24,10 @@
   transition: text-decoration ease-in-out 1s;
 }
 
+.custom-btn {
+  @apply bg-[#E7E7E7] text-[#FF6340] px-3 py-1 text-lg font-medium font-Lato
+}
+
 @keyframes slideDown {
   0% {
     transform: scaleY(0);
