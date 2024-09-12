@@ -24,7 +24,7 @@ const QuizAnswers = (props) => {
 
   if (showAns) {
     return (
-      <div className={`${isRight?'bg-green-500' : 'bg-red-500'} rounded-md p-3 text-black font-medium`}>
+      <div className={`${isRight?'bg-green-500' : 'bg-red-500'} rounded-md p-3 text-black font-medium fade-in-fwd`}>
       {message}
       {props.answers[props.correctAns]}
     </div>
@@ -32,7 +32,7 @@ const QuizAnswers = (props) => {
   }
 
   return (
-    <ul className="font-normal list-decimal flex flex-col gap-3 mx-5">
+    <ul className="font-normal list-decimal flex flex-col gap-3 mx-5 fade-in-fwd">
       {Object.keys(props.answers).map((key) => {
         const answer = props.answers[key];
         return (

@@ -4,6 +4,7 @@ import QuizAnswers from "./QuizAnswers";
 import { useSelector } from "react-redux";
 import ResultPage from "./ResultPage";
 import Loading from "./Loading";
+import Error from "./Error";
 
 const Quiz = (props) => {
   const filteredQuizData = props.data.filter(
@@ -46,14 +47,7 @@ const Quiz = (props) => {
 
   if (status === "failed") {
     return (
-      <div className="mx-6 mt-9 flex h-96 flex-col justify-between rounded-md bg-[#FF6340] py-9 text-center text-[#E7E7E7]">
-        <p className="text-xl text-[#E7E7E7] font-Kanit">
-          Sorry no quiz available for this category right now!
-        </p>
-        <button onClick={props.onClose} className="font-Lato w-60 bg-black mx-auto py-3 rounded-md hover:bg-[#E7E7E7] hover:text-black transition-colors ease-out duration-500">
-          Go back to Homepage
-        </button>
-      </div>
+      <Error onClose={ props.onClose } />
     );
   }
 
@@ -70,13 +64,14 @@ const Quiz = (props) => {
   }
 
   return (
-    <div className="mx-6 mt-9 flex flex-col items-start justify-center gap-8 text-[#E7E7E7]">
+    <div className="mx-6 mt-9 flex flex-col items-start justify-center gap-8 text-[#E7E7E7] fade-in-fwd">
       <button
         onClick={props.onClose}
         className="custom-btn transition-border ease-in-out"
       >
         Close Quiz
       </button>
+
       {status === "succeeded" && (
         <div className="self-center">Question: {qusCounter}</div>
       )}
@@ -86,7 +81,7 @@ const Quiz = (props) => {
             key={index}
             className="flex flex-col gap-5 font-Barlow text-lg font-semibold"
           >
-            <p>{quiz.question}</p>
+            <p className="fade-in-fwd">{quiz.question}</p>
             <QuizAnswers
               answers={quiz.answers}
               correctAns={quiz.correct_answer}

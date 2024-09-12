@@ -29,6 +29,7 @@ const HomePage = () => {
 
   function handleQuizClose() {
     setShowQuiz(false);
+    setShowCategories(false);
   }
 
   function toggleCategories() {
@@ -44,7 +45,7 @@ const HomePage = () => {
   }
 
   return (
-    <div className="relative">
+    <div className="relative fade-in-bottom">
       {showQuiz ? (
         <Quiz data={quizData} onClose={handleQuizClose} />
       ) : (
