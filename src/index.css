@@ -21,13 +21,17 @@
 }
 
 .custom-btn {
-  @apply bg-[#E7E7E7] text-[#000000] px-3 py-1 text-lg font-medium font-Lato transition-colors duration-500 ease-in-out
+  @apply bg-[#E7E7E7] px-3 py-1 font-Lato text-lg font-medium text-[#000000] transition-colors duration-500 ease-in-out;
 }
 
 .custom-btn:hover {
-  @apply hover:bg-[#FF6340] hover:text-[#E7E7E7]
+  @apply hover:bg-[#FF6340] hover:text-[#E7E7E7];
 }
 
+.transition-border:hover {
+  border-radius: 6px;
+  transition: border-radius 500ms ease-in-out;
+}
 
 @keyframes slideDown {
   0% {
@@ -62,4 +66,3 @@
     border-radius: 0 0 6px 6px;
   }
 }
-

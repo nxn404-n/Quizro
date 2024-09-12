@@ -24,7 +24,7 @@ const QuizAnswers = (props) => {
 
   if (showAns) {
     return (
-      <div className={`${isRight?'bg-green-500' : 'bg-red-500'} rounded-md p-3 text-black`}>
+      <div className={`${isRight?'bg-green-500' : 'bg-red-500'} rounded-md p-3 text-black font-medium`}>
       {message}
       {props.answers[props.correctAns]}
     </div>

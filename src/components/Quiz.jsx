@@ -3,6 +3,7 @@ import { useState } from "react";
 import QuizAnswers from "./QuizAnswers";
 import { useSelector } from "react-redux";
 import ResultPage from "./ResultPage";
+import Loading from "./Loading";
 
 const Quiz = (props) => {
   const filteredQuizData = props.data.filter(
@@ -40,21 +41,25 @@ const Quiz = (props) => {
   };
 
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   if (status === "failed") {
     return (
-      <div>
-        <p>Sorry no quiz available for now!</p>
-        <button onClick={props.onClose}>Go back to Homepage</button>
+      <div className="mx-6 mt-9 flex h-96 flex-col justify-between rounded-md bg-[#FF6340] py-9 text-center text-[#E7E7E7]">
+        <p className="text-xl text-[#E7E7E7] font-Kanit">
+          Sorry no quiz available for this category right now!
+        </p>
+        <button onClick={props.onClose} className="font-Lato w-60 bg-black mx-auto py-3 rounded-md hover:bg-[#E7E7E7] hover:text-black transition-colors ease-out duration-500">
+          Go back to Homepage
+        </button>
       </div>
     );
   }
 
   if (quizCompleted) {
     return (
-      <div className="text-[#E7E7E7]">
+      <div className="mx-6 mt-9 flex h-96 flex-col justify-center text-[#E7E7E7]">
         <ResultPage
           correctAnsCount={correctAnsCount}
           totalQuizCount={filteredQuizData.length}
@@ -65,8 +70,11 @@ const Quiz = (props) => {
   }
 
   return (
-    <div className="ml-6 mr-6 mt-9 flex flex-col items-start justify-center gap-8 text-[#E7E7E7]">
-      <button onClick={props.onClose} className="custom-btn ease-in-out hover:rounded-md">
+    <div className="mx-6 mt-9 flex flex-col items-start justify-center gap-8 text-[#E7E7E7]">
+      <button
+        onClick={props.onClose}
+        className="custom-btn transition-border ease-in-out"
+      >
         Close Quiz
       </button>
       {status === "succeeded" && (
@@ -86,7 +94,10 @@ const Quiz = (props) => {
               handleSkipOrNext={handleSkipOrNext}
             />
             <div>
-              <button onClick={handleSkip} className="custom-btn hover:rounded-md">
+              <button
+                onClick={handleSkip}
+                className="custom-btn transition-border"
+              >
                 {skipOrNext ? "skip" : "next"}
               </button>
             </div>

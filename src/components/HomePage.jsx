@@ -56,7 +56,7 @@ const HomePage = () => {
             </p>
             <button
               onClick={() => toggleCategories()}
-              className={`text-lg z-10 ml-3 h-10 w-72 custom-btn font-bold tracking-wider ${showCategories ? "hover:rounded-t-md" : "hover:rounded-md"} ${showCategories ? "rounded-t-md" : ""}`}
+              className={`text-lg z-10 ml-3 h-10 w-72 custom-btn font-bold tracking-wider ${showCategories ? "hover:rounded-t-md" : "transition-border"} ${showCategories ? "rounded-t-md" : ""}`}
             >
               Categories
             </button>
