@@ -45,37 +45,38 @@ const HomePage = () => {
   }
 
   return (
-    <div className="relative fade-in-bottom">
+    <div className="fade-in-bottom h-full">
       {showQuiz ? (
-        <Quiz data={quizData} onClose={handleQuizClose} />
+        <div className="flex flex-col items-start justify-center">
+          <Quiz data={quizData} onClose={handleQuizClose} />
+        </div>
       ) : (
-        <div className="flex flex-col pl-5 pt-10">
+        <div className="flex flex-col pl-5 pt-10 sm:gap-9 md:gap-16 lg:gap-24">
           <MainContent />
-          <div className="flex flex-col">
+          <div className="flex flex-col pb-20">
             <p className="mb-4 ml-3 mt-9 text-xl text-[#E7E7E7]">
               Select a category:
             </p>
             <button
               onClick={() => toggleCategories()}
-              className={`text-lg z-10 ml-3 h-10 w-72 custom-btn font-bold tracking-wider ${showCategories ? "hover:rounded-t-md" : "transition-border"} ${showCategories ? "rounded-t-md" : ""}`}
+              className={`custom-btn z-10 mx-6 ml-3 max-h-10 max-w-72 text-lg font-bold tracking-wider ${showCategories && "rounded-t-md hover:rounded-t-md hover:rounded-b-none"}`}
             >
               Categories
             </button>
             {showCategories && (
               <>
                 <ul
-                  className={`dropdown py-3 z-10 ml-3 flex h-60 w-72 flex-col gap-5 overflow-y-auto border-2 bg-[#E7E7E7] text-lg ${isClosing ? "close" : "open"}`}
+                  className={`dropdown z-10 mx-6 ml-3 flex max-h-60 max-w-72 flex-col gap-5 overflow-y-auto border-2 bg-[#E7E7E7] py-3 text-lg sm:max-h-72 ${isClosing ? "close" : "open"}`}
                 >
-                  {!isClosing &&
-                    categories.map((category) => (
-                      <li
-                        key={category.id}
-                        onClick={() => handleClick(category.name)}
-                        className="cursor-pointer text-[#000000] custom-underline pl-6"
-                      >
-                        {category.name}
-                      </li>
-                    ))}
+                  {categories.map((category) => (
+                    <li
+                      key={category.id}
+                      onClick={() => handleClick(category.name)}
+                      className={`custom-underline cursor-pointer pl-6 text-[#000000] ${isClosing && "opacity-0"}`}
+                    >
+                      {category.name}
+                    </li>
+                  ))}
                 </ul>
 
                 <div

@@ -33,6 +33,7 @@ const Quiz = (props) => {
   const { status } = useSelector((state) => state.quiz);
 
   const handleSkip = () => {
+    handleSkipOrNext();
     if (currentIndex < filteredQuizData.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
@@ -53,7 +54,7 @@ const Quiz = (props) => {
 
   if (quizCompleted) {
     return (
-      <div className="mx-6 mt-9 flex h-96 flex-col justify-center text-[#E7E7E7]">
+      <div className="mx-6 mt-9 flex max-w-3xl min-h-96 flex-col justify-center items-center self-center text-[#E7E7E7]">
         <ResultPage
           correctAnsCount={correctAnsCount}
           totalQuizCount={filteredQuizData.length}
@@ -64,10 +65,10 @@ const Quiz = (props) => {
   }
 
   return (
-    <div className="mx-6 mt-9 flex flex-col items-start justify-center gap-8 text-[#E7E7E7] fade-in-fwd">
+    <div className="mx-6 mt-9 flex flex-col items-start gap-8 text-[#E7E7E7] fade-in-fwd sm:w-96">
       <button
         onClick={props.onClose}
-        className="custom-btn transition-border ease-in-out"
+        className="custom-btn"
       >
         Close Quiz
       </button>
@@ -91,7 +92,7 @@ const Quiz = (props) => {
             <div>
               <button
                 onClick={handleSkip}
-                className="custom-btn transition-border"
+                className="custom-btn"
               >
                 {skipOrNext ? "skip" : "next"}
               </button>

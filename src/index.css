@@ -9,7 +9,7 @@
 }
 
 .dropdown.close {
-  animation: slideUp 500ms ease-out forwards;
+  animation: slideUp 500ms ease forwards;
   transform-origin: top;
 }
 
@@ -21,16 +21,19 @@
 }
 
 .custom-btn {
-  @apply bg-[#E7E7E7] px-3 py-1 font-Lato text-lg font-medium text-[#000000] transition-colors duration-500 ease-in-out;
+  background-color: #E7E7E7;
+  padding: 0.25rem 0.75rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #000000;
+  transition: 500ms ease-in-out;
 }
 
 .custom-btn:hover {
-  @apply hover:bg-[#FF6340] hover:text-[#E7E7E7];
-}
-
-.transition-border:hover {
+  background-color: #FF6340;
+  color: #E7E7E7;
   border-radius: 6px;
-  transition: border-radius 500ms ease-in-out;
 }
 
 @keyframes slideDown {
@@ -50,9 +53,7 @@
     transform: scaleY(1);
     opacity: 1;
     border-radius: 0 0 1px 1px;
-  }
-
-  33% {
+  }   33% {
     border-radius: 0 0 2px 2px;
   }
 
